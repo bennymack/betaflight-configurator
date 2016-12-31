@@ -464,14 +464,14 @@ TABS.motors.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_SERVO, false, false, update_ui);
         }
 
-        var full_block_scale = MISC.maxthrottle - MISC.mincommand;
+        var full_block_scale = MISC.maxthrottle - 1000;
         
         function update_ui() {            
             var previousArmState = self.armed;                                   
             var block_height = $('div.m-block:first').height();
 
             for (var i = 0; i < MOTOR_DATA.length; i++) {
-                var data = MOTOR_DATA[i] - MISC.mincommand,
+                var data = MOTOR_DATA[i] - 1000,
                     margin_top = block_height - (data * (block_height / full_block_scale)).clamp(0, block_height),
                     height = (data * (block_height / full_block_scale)).clamp(0, block_height),
                     color = parseInt(data * 0.009);
